@@ -29,8 +29,8 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>らべねこのひとこと日記帳</title>
-        <meta name="description" content="らべねこのひとこと日記帳です" />
+        <title>{article.title} | らべねこのひとこと日記帳</title>
+        <meta name="description" content="{article.description}" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
