@@ -37,7 +37,7 @@ export default function Home() {
         <div className={styles.grid}>
           {articles.map((article)=> {
             return (
-              <a key={article.id} href={`/articles/${article.id}`} className={styles.card}>
+              <a key={article.id} href={`/articles?id=${article.id}`} className={styles.card}>
                 <h2>{article.title}</h2>
                 <p>{article.description}</p>
               </a>

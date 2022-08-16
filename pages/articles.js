@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { firestore } from '../../lib/firebase'
+import { firestore } from '../lib/firebase'
 import { doc, getDoc } from "firebase/firestore"
-import styles from '../../styles/Home.module.css'
+import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
