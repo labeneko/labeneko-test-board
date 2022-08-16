@@ -30,7 +30,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1>
         らべねこのひとこと日記帳へようこそ！
         </h1>
 

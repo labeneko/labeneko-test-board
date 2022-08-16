@@ -35,12 +35,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.grid}>
-          <div key={article.id}>
-            <h2>{article.title}</h2>
-            <p>{article.description}</p>
-          </div>
-        </div>
+        <h1>{article.title}</h1>
+        <p>{article.description}</p>
       </main>
     </div>
   )
