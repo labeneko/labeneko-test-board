@@ -10,7 +10,7 @@ export default function Home() {
   const { id } = query;
   const [article, setArticle] = useState([]);
   useEffect(() => {
-    async function fetchData() {
+    (async () => {
       if (!id) {
         return;
       }
@@ -23,9 +23,11 @@ export default function Home() {
           description: docSnap.data().description
         });
       }
-    }
-    fetchData();
+    })();
   }, [id]);
+  if (!article) {
+    return <p>読込み中…</p>
+  }
   return (
     <div className={styles.container}>
       <Head>

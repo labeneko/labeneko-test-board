@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    async function fetchData() {
+    (async () => {
       const articles = [];
       const querySnapshot = await getDocs(collection( firestore, 'articles'));
       querySnapshot.forEach((doc) => {
@@ -18,9 +18,11 @@ export default function Home() {
         });
       });
       setArticles(articles)
-    }
-    fetchData();
+    })();
   }, []);
+  if (!articles) {
+    return <p>読込み中…</p>
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -37,7 +39,7 @@ export default function Home() {
         <div className={styles.grid}>
           {articles.map((article)=> {
             return (
-              <a key={article.id} href={`/articles?id=${article.id}`} className={styles.card}>
+              <a key={article.id} href={`/article?id=${article.id}`} className={styles.card}>
                 <h2>{article.title}</h2>
                 <p>{article.description}</p>
               </a>
