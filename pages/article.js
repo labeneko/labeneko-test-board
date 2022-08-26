@@ -1,20 +1,21 @@
 import Head from 'next/head'
-import { firestore } from '../lib/firebase'
+import { db } from '../lib/firebase'
 import { doc, getDoc } from "firebase/firestore"
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Home() {
-  const { query } = useRouter()
-  const { id } = query;
+  const router = useRouter()
+  const id = router.query.id;
   const [article, setArticle] = useState([]);
   useEffect(() => {
     (async () => {
+      // パラメータが取得できるまでは処理をスキップする
       if (!id) {
         return;
       }
-      const docRef = doc(firestore, "articles", id);
+      const docRef = doc(db, "articles", id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setArticle({
@@ -25,9 +26,6 @@ export default function Home() {
       }
     })();
   }, [id]);
-  if (!article) {
-    return <p>読込み中…</p>
-  }
   return (
     <div className={styles.container}>
       <Head>
@@ -35,7 +33,6 @@ export default function Home() {
         <meta name="description" content="{article.description}" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className={styles.main}>
         <h1>{article.title}</h1>
         <p>{article.description}</p>

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { firestore } from '../lib/firebase'
+import { db } from '../lib/firebase'
 import { collection, getDocs } from "firebase/firestore"
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react';
@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const articles = [];
-      const querySnapshot = await getDocs(collection( firestore, 'articles'));
+      const querySnapshot = await getDocs(collection(db, 'articles'));
       querySnapshot.forEach((doc) => {
         articles.push({
           id: doc.id,
@@ -20,9 +20,6 @@ export default function Home() {
       setArticles(articles)
     })();
   }, []);
-  if (!articles) {
-    return <p>読込み中…</p>
-  }
   return (
     <div className={styles.container}>
       <Head>
@@ -39,7 +36,7 @@ export default function Home() {
         <div className={styles.grid}>
           {articles.map((article)=> {
             return (
-              <a key={article.id} href={`/article?id=${article.id}`} className={styles.card}>
+              <a key={article.id} href={`/article.html?id=${article.id}`} className={styles.card}>
                 <h2>{article.title}</h2>
                 <p>{article.description}</p>
               </a>
